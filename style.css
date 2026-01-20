@@ -2,17 +2,24 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Crucial for Box Model: width includes border and padding */
+    box-sizing: border-box;
+    /* Crucial for Box Model: width includes border and padding */
 }
 
 /* Variables for Theme */
 :root {
-    --bg-color: #0f172a;       /* Dark slate blue background */
-    --card-bg: #1e293b;        /* Lighter slate for cards */
-    --text-primary: #f8fafc;   /* Almost white text */
-    --text-secondary: #94a3b8; /* Muted text */
-    --accent-color: #38bdf8;   /* Sky blue accent */
-    --border-color: #334155;   /* Border color */
+    --bg-color: #0f172a;
+    /* Dark slate blue background */
+    --card-bg: #1e293b;
+    /* Lighter slate for cards */
+    --text-primary: #f8fafc;
+    /* Almost white text */
+    --text-secondary: #94a3b8;
+    /* Muted text */
+    --accent-color: #38bdf8;
+    /* Sky blue accent */
+    --border-color: #334155;
+    /* Border color */
     --spacing-sm: 8px;
     --spacing-md: 16px;
     --spacing-lg: 24px;
@@ -29,9 +36,13 @@ body {
 }
 
 /* Layout Container (centering content) */
-main, header, nav, footer {
+main,
+header,
+nav,
+footer {
     max-width: 800px;
-    margin: 0 auto; /* Center block elements horizontally */
+    margin: 0 auto;
+    /* Center block elements horizontally */
 }
 
 /* Header Styling */
@@ -69,11 +80,13 @@ nav {
 }
 
 nav h2 {
-    display: none; /* Hide 'Navigation' heading visually but keep for semantics if needed, or style it. layout-wise usually hidden */
+    display: none;
+    /* Hide 'Navigation' heading visually but keep for semantics if needed, or style it. layout-wise usually hidden */
 }
 
 nav ul {
-    list-style: none; /* Remove bullets */
+    list-style: none;
+    /* Remove bullets */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -97,7 +110,8 @@ nav a:hover {
 
 /* Section Styling */
 section {
-    margin-bottom: var(--spacing-xl); /* Vertical spacing between sections */
+    margin-bottom: var(--spacing-xl);
+    /* Vertical spacing between sections */
 }
 
 section h2 {
@@ -108,15 +122,37 @@ section h2 {
     padding-left: var(--spacing-sm);
 }
 
+/* Flexbox Layout for Card Grids */
+.card-grid {
+    display: flex;
+    /* Enables flexbox layout for direct children */
+    flex-wrap: wrap;
+    /* Allows items to wrap to the next line if space is limited (responsive behavior) */
+    gap: var(--spacing-md);
+    /* Adds space between flex items (rows and columns) */
+    justify-content: flex-start;
+    /* Aligns items to the start of the main axis (left) */
+    align-items: stretch;
+    /* Stretches items to fill the container height so all cards in a row match height */
+}
+
 /* Card Component (The Box Model Star) */
 .card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: var(--spacing-lg); /* internal spacing */
-    margin-bottom: var(--spacing-md); /* external spacing */
+    padding: var(--spacing-lg);
+    /* internal spacing */
+    margin-bottom: 0;
+    /* Removed bottom margin as grid gap handles spacing now! */
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: transform 0.2s;
+
+    /* Flex item sizing */
+    flex-basis: calc(50% - var(--spacing-md));
+    /* Default: Take up 50% width minus the gap */
+    flex-grow: 1;
+    /* Allow cards to grow to fill empty space */
 }
 
 .card:hover {
@@ -138,15 +174,54 @@ section h2 {
     margin-bottom: 0;
 }
 
+/* Specific responsiveness for Mobile */
+@media (max-width: 600px) {
+    .card {
+        flex-basis: 100%;
+        /* On small screens, cards take full width */
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        /* Stack nav items vertically on small screens */
+        align-items: stretch;
+    }
+
+    nav a {
+        text-align: center;
+        display: block;
+    }
+
+    main,
+    header,
+    nav,
+    footer {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+}
+
 /* List Styling (Skills, Tools) */
-section#skills ul, section#tools ul, section#certifications ul, section#courses ul, section#leadership ul {
+section#skills ul,
+section#tools ul,
+section#certifications ul,
+section#courses ul,
+section#leadership ul {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-sm);
     list-style: none;
 }
 
-section#skills li, section#tools li, section#certifications li, section#courses li, section#leadership li {
+section#skills li,
+section#tools li,
+section#certifications li,
+section#courses li,
+section#leadership li {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: var(--spacing-sm) var(--spacing-md);
@@ -155,7 +230,8 @@ section#skills li, section#tools li, section#certifications li, section#courses 
     color: var(--text-primary);
 }
 
-section#skills li:hover, section#tools li:hover {
+section#skills li:hover,
+section#tools li:hover {
     border-color: var(--accent-color);
     color: var(--accent-color);
 }
